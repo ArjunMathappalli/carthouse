@@ -1,0 +1,31 @@
+<%- include('../layouts/header.ejs') %>
+<%- include('../layouts/navbar.ejs') %>
+<%- include('../layouts/sidebar.ejs') %>
+
+<div class="main-panel">        
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Edit Banner</h4>
+            <form class="forms-sample" action="" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <input type="text" class="form-control" name="category" value="<%= banner.name %>">
+                <label for="category">Banner</label>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="description" value="<%=banner.description %>">
+                <label for="description">Description</label>
+              </div>
+              <div class="form-group">
+                <input type="file" class="form-control" name="image" value="">
+                <label for="description">Image</label>
+              </div>
+              <button type="submit" class="btn btn-primary mr-2">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+<%- include('../layouts/footer.ejs') %>

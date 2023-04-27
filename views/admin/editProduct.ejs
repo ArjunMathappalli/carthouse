@@ -1,0 +1,50 @@
+<%- include('../layouts/header.ejs') %>
+<%- include('../layouts/navbar.ejs') %>
+<%- include('../layouts/sidebar.ejs') %>
+
+<div class="main-panel">        
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Edit Product</h4>
+            <form class="forms-sample" action="" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <input type="text" class="form-control" name="product" value="<%= productId.name %>">
+                <label for="product">ProductName</label>
+              </div>
+              <div class="form-group">
+                <input type="file" class="form-control" accept="image/*" name="image" multiple="multiple">
+                <% productId.image.forEach((element,index)=>{%>
+                  <img src="/productImages/<%=element%>" alt="" width="50px" height="50px">
+                <% }) %>
+                <label for="image">Image</label>
+              </div>
+              <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control" id="category" name="category" required>
+                  
+                  <% for(category of categories){%>
+                    <option value="<%= category._id %>">
+                      <%= category.name %>
+                    </option>
+                 <% } %>
+                </select>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="description" value="<%= productId.description %>">
+                <label for="description">Description</label>
+              </div>
+              <div class="form-group">
+                <label for="stock">Stock</label>
+                <input  min="1" inputmode="numeric" type="number" class="form-control" name="stock" required>
+              </div>
+              <input type="hidden" name="id" value="<%= productId._id %>">
+              <button type="submit" class="btn btn-primary mr-2">Save</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+<%- include('../layouts/footer.ejs') %>
