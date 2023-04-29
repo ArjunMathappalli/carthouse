@@ -94,7 +94,7 @@ user_route.post('/returnOrder',auth.isLogin,userController.returnOrder);
 
 //COUPON ROUTES //
 user_route.post('/applycoupon',auth.isLogin,couponController.applycoupon)
-user_route.post('/deleteCoupon', auth.isLogin, userController.deleteCoupon);
+user_route.post('/removeCoupon', auth.isLogin, userController.removecoupon);
 
 //PAYMENT VERIFICATION//
 user_route.post('/verifPpayment',auth.isLogin,userController.verifPpayment)

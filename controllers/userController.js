@@ -1393,25 +1393,25 @@ const filterProduct = async (req, res) => {
     console.log(error.message);
   }
 };
-const deleteCoupon = async (req, res, next) => {
+// Add a new route to handle removing the coupon from the cart
+const removecoupon = async (req, res) => {
   try {
-    const userId = req.session.user_id;
-    const couponId = req.body.code;
-    console.log(couponId);
+      const user = req.session.user_id;
+    const couponId = req.body.couponId;
 
     const data = await User.updateOne(
-      { _id: userId },
+      { _id: user._id },
       { $pull: { coupons: { _id: couponId } } }
     );
-    console.log(data);
 
     if (data) {
-      res.json({ success: true });
+      const updatedUser = await User.findOne({ _id: user._id });
+      res.json({ success: true, coupons: updatedUser.coupons });
     }
   } catch (error) {
-    next(error.message);
+    console.log(error.message);
   }
-};
+}
 
 
 
@@ -1461,7 +1461,7 @@ module.exports = {
   search,
   userlogOut,
   filterProduct,
-  deleteCoupon
+  removecoupon
 
   
 };

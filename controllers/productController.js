@@ -24,29 +24,6 @@ const newProduct = async(req,res,next)=> {
   }
 }
 
-// const addProduct = async(req,res,next)=>{
-//   try {
-//     const newProductData = new product({
-//       name:req.body.name,
-//       image:req.body.image,
-//       category:req.body.category,
-//       description:req.body.description,
-//       stock:req.body.stock,
-//       price:req.body.price
-//     })
-
-//     const productSaved = await newProductData.save()
-//     if(productSaved){
-//       const productId = await product.find()
-//       res.redirect('/admin/products')
-//     }
-//     else{
-//       res.render('addProducts', { message: 'operation failed' })
-//     }
-//   } catch (error) {
-//     next(error.message)
-//   }
-// }
 
 const addProduct = async(req,res,next)=> {
   try {

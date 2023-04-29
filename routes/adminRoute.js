@@ -75,9 +75,6 @@ admin_route.get('*',function(req,res){
   res.redirect('/admin')
 });
 
-// admin_route.use((req,res,next)=>{
-//   res.render('404')
-// })
 
 module.exports = admin_route;
 

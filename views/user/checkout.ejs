@@ -270,13 +270,9 @@
 
                       <br>
                       <div>
-                        <button class="btn btn-outline-info btn-md" type="button" style="margin-top:-28px;margin-left:26px;"
-                        onclick="deleteCoupon('<%= x.code %>')">
-                        Remove coupon
-                    </button>
-                    
-
-
+                        <button class="btn btn-outline-danger btn-md" type="button" onclick="removeCoupon()" style="margin-top: -108px;margin-left: 189px;">
+                          Remove coupon
+                        </button>
                       </div>
                       <!-- <div class="col-8 " style="color: #000000;">
                           <p>gdgfdgdf</p>
@@ -564,7 +560,7 @@
         "prefill": {
           "name": "ARJUNP", //your customer's name
           "email": "arjun.com",
-          "contact": "8137918126"
+          "contact": "9447597412"
         },
         "notes": {
           "address": "Razorpay Corporate Office"
@@ -679,7 +675,7 @@
 </script>
 
 <script>
-  function deleteCoupon(couponId) {
+  function removeCoupon(couponId) {
   Swal.fire({
     title: 'Are you sure?',
     text: "You want to remove the coupon!",
@@ -688,38 +684,36 @@
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
     confirmButtonText: 'Yes, remove!'
-  }).then((result) => {
+  }).then(async (result) => {
     if (result.isConfirmed) {
-      $.ajax({
-        url: '/deleteCoupon',
-        data: {
-          code: couponId
-        },
-        method: "post",
-        success: (response) => {
-          $('.cartPage').load('/checkout .checkoutPage')
-          console.log(response);
+      try {
+        const response = await fetch('/removeCoupon', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ couponId })
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          // Do something with the updated coupons array
+          console.log(data.coupons);
           Swal.fire({
             title: 'Removed!',
-            text: 'Coupon removed from cart',
+            text: 'Coupon removed from your account.',
             icon: 'success',
             timer: 1000,
             showConfirmButton: false
-          })
-        },
-        error: (error) => {
-          console.log(error);
-          Swal.fire({
-            title: 'Error!',
-            text: 'Failed to remove coupon',
-            icon: 'error',
-            timer: 1000,
-            showConfirmButton: false
-          })
+          });
         }
-      })
+      } catch (error) {
+        console.error(error.message);
+      }
     }
-  })
+  });
 }
 
 </script>
+
+
