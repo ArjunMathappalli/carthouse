@@ -56,7 +56,8 @@ const loadHome = async (req, res, next) => {
     } else {
       const productData = await product.find({})
       const bannerData = await Banner.find({})
-      res.render("homePage", { productInfo:productData, BannerData: bannerData });
+      const userInfo = await User.findOne({});
+      res.render("homePage", { productInfo:productData, BannerData: bannerData,user: userInfo });
     }
   } catch (error) {
     next(error.message);
@@ -277,6 +278,7 @@ const loadWishlist = async(req,res,next)=> {
 
     const user = req.session.user_id;
     const userData = await User.findOne({_id:user._id}).populate('wishlist.product')
+    console.log(productData);
     res.render('wishlist',{user:userData, category:categoryData, product: productData })
 
   } catch (error) {
@@ -690,7 +692,7 @@ const editProfile = async(req,res,next)=> {
     }
 
   } catch (error) {
-    next(error.message)
+    res.render('404')
   }
 }
 
@@ -1021,8 +1023,15 @@ const returnOrder = async(req,res,next)=> {
     
     const id = req.body.orderId;
     const status = 'Return requested'
-    const Return = await order.updateOne({_id:id},
+    const Return = await orderData.updateOne({_id:id},
       {$set:{status:status}})
+      if(Return){
+        const orderdata = await orderData.findOne({_id:id})
+        if(orderdata.paymentType ==='COD' || orderdata.paymentType ==='ONLINE' || orderdata.paymentType ==='WALLET'){
+          const refund = await User.updateOne({_id:orderdata.userId},
+            {$inc:{ wallet:orderdata.total }}) 
+        }
+      }
 
       res.json({success:true})
 
@@ -1075,15 +1084,18 @@ const allProducts = async(req,res)=>{
       })
     }
     else{
+      const userdata = await User.findOne({})
       res.render('allProducts',{
         Product:productdata,
         productCount:procount,
         category:categorydata,
+        user:userdata,
       })
     }
 
   } catch (error) {
     console.log(error.message);
+    
   }
 }
 //category wise filtering
@@ -1364,28 +1376,28 @@ const filterProduct = async (req, res) => {
         });
       });
 
-      if (brands) {
-        brands.forEach((value, i) => {
-          Data.forEach((element) => {
-            Datas[i] = element.filter((producte) => {
-              return producte.brand.brandName == value;
-            });
-          });
-        });
-      }
+      // if (brands) {
+      //   brands.forEach((value, i) => {
+      //     Data.forEach((element) => {
+      //       Datas[i] = element.filter((producte) => {
+      //         return producte.brand.brandName == value;
+      //       });
+      //     });
+      //   });
+      // }
       Datas.forEach((value, i) => {
         Data[i] = value;
       });
     } else {
-      if (brands) {
-        brands.forEach((value, i) => {
-          Data[i] = producte.filter((element) => {
-            return element.brand.brandName == value;
-          });
-        });
-      } else {
+      // if (brands) {
+      //   brands.forEach((value, i) => {
+      //     Data[i] = producte.filter((element) => {
+      //       return element.brand.brandName == value;
+      //     });
+      //   });
+      // } else {
         Data[0] = producte;
-      }
+      // }
     }
     console.log(Data)
     res.json({ Data });

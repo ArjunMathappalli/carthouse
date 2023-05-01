@@ -38,8 +38,8 @@
                             <td rowspan="<%= order.product.length %>"><%= order.user.name %></td>
                             <td rowspan="<%= order.product.length %>"><%= order.user.address %></td>
                           <% } else { %>
-                            <td rowspan="<%= order.product.length %>">N/A</td>
-                            <td rowspan="<%= order.product.length %>">N/A</td>
+                            <td rowspan="<%= order.product.length %>"><%=order.userId.name%></td>
+                            <td rowspan="<%= order.product.length %>"><%= order.userId.address[0].district %></td>
                           <% } %>
                         <% } %>
                         <td><%= product.productId.name %></td>

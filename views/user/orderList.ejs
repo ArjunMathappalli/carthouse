@@ -56,7 +56,13 @@
         <%} else if(x.status==='Delivered'){ %>
         <td>
           <!-- <a type="button" class="btn btn-outline-warning btn-sm  mb-2" href="#">Cancell</a> -->
+          <% const deliveryDate=new Date(order[index].date); %>
+          <% const returnDate=new Date(deliveryDate.getTime() + (14 * 24 * 60 * 60 * 1000)); %>
+            <% const currentDate=new Date(); %>
+              <% if (currentDate <=returnDate) { %>
+          
           <a onclick="returnOrder('<%=x._id%>')" type="button" class="btn btn-outline-danger btn-sm  mb-2" href="#">Return</a>
+          <% } %>
         </td>
         <% }else{ %>
         <td>

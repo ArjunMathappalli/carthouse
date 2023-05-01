@@ -224,7 +224,7 @@ const salesReport = async(req,res,next)=> {
         status:'Delivered',
         date:{$gte: new Date(req.body.from),
         $lte: new Date(newDate)}
-      }).populate('product.productId')
+      }).populate('product.productId').populate('userId')
      
 
       res.render('salesReport', {sales:salesData})

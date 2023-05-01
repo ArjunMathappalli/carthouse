@@ -37,6 +37,7 @@ user_route.post("/verifyReset", userController.verifyReset);
 // SINGLE PRODUCT ROUTES //
 
 user_route.get('/singleProduct',productController.productDetails);
+user_route.post("/singleProduct",  productController.addReview);
 
 // ALL PRODUCT //
 user_route.get('/allProducts',auth.isLogin,userController.allProducts)

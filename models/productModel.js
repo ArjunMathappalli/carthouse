@@ -32,6 +32,12 @@ const productSchema = new mongoose.Schema({
     type:Number,
     required:true
   },
+  review: [
+    {
+      userName: { type: String },
+      message: { type: String },
+    },
+  ],
 })
 
 module.exports = mongoose.model('Product',productSchema);

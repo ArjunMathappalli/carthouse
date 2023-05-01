@@ -45,7 +45,7 @@
                   </div>
                   <% }) %>
                   <hr class="mb-3" style="background-color:  rgb(173, 173, 173) ; opacity: 1;">
-
+                  <div id="example">
                   <div class="d-flex justify-content-between pt-2 mr-3">
                     <p class="fw-bold mb-1" style="font-weight:900;">Order Details</p>
                   </div>
@@ -72,14 +72,15 @@
                     <p class="text-success mb-0"><span class="fw-bold text-success me-4">You saved : </span>₹<%=order.discount %> </p>
                     <% } %>
                   </div>
-
+                </div>
                   <div class="card-footer border  -0 px-4 d-flex justify-content-between " style="background-color: #1e1e1e; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
                     <a href="/allProducts" class="btn btn-outline-warning ">Continue shopping
                     </a>
                     <h6 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0  "><span class="h6  mb-0">Total
                         amount : <%= order.total %></span></h6>
                   </div>
-
+                  <input style="padding:5px;" class="btn btn-success" value="Invoice" type="button" onclick="myFunction()"></input>
+                
 
                 </div>
 
@@ -100,7 +101,17 @@
 
 
 
-
+  <script>
+    function myFunction()
+    {
+      
+      var content = document.getElementById("example").outerHTML;
+  var newWindow = window.open();
+  newWindow.document.write(content);
+  newWindow.print();
+  newWindow.close();
+    }
+  </script>
 
 <script>
   $('#checkout-form').submit((x) => {
