@@ -64,7 +64,7 @@ const applycoupon = async (req, res) => {
     const Code = code.toUpperCase();
     let user = req.session.user_id;
     console.log(user);
-    const data = await couponData.findOne({ code: Code });
+    const data = await couponData.findOne({ code: code });
     const Codee = data.code;
     if (data) {
       console.log("check1");

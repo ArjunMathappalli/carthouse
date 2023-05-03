@@ -794,6 +794,7 @@ const loadOrderSuccess = async (req, res) => {
 
     if (req.body.paymentType == "COD") {
       const status = req.body.paymentType == "COD" ? "confirmed" : "pending";
+      console.log(req.body.discount1+"lllllllllllllllllllllllllllllllllll")
       const total = req.body.total - req.body.discount1;
 
       const order = new orderData({

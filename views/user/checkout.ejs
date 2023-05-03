@@ -489,7 +489,7 @@
 
     <script>
       function applycoupon(price, coupon) {
-
+        console.log(price + "mmmmmmmmmmm"+coupon);
 
         $.ajax({
           url: '/applycoupon',
@@ -721,9 +721,14 @@
     <script>
       function removeCoupon() {
         document.getElementById("discount").innerText = "0";
+        document.getElementById("discount1").innerText = "0";
+
         console.log('<%=user.cartTotalPrice%>');
         document.getElementById("total").innerHTML = '<%=user.cartTotalPrice%>';
+        document.getElementById("total1").innerHTML = '<%=user.cartTotalPrice%>';
 
+
+        
       }
 
     </script>
