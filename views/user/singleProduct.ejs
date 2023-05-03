@@ -1,285 +1,223 @@
 <%- include('../layouts/user/header.ejs') %>
-<%- include('../layouts/user/navbar.ejs') %>
+  <%- include('../layouts/user/navbar.ejs') %>
 
-<section class="banner_area">
-  <div class="banner_inner d-flex align-items-center">
-    <div class="container">
-      <div
-        class="banner_content d-md-flex justify-content-between align-items-center"
-      >
-        <div class="mb-3 mb-md-0">
-          <h2>Product Details</h2>
-          <p>Very us move be blessed multiply night</p>
-        </div>
-        <div class="page_link">
-          <a href="/">Home</a>
-          
+    <section class="banner_area">
+      <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+          <div class="banner_content d-md-flex justify-content-between align-items-center">
+            <div class="mb-3 mb-md-0">
+              <h2>Product Details</h2>
+              <p>Very us move be blessed multiply night</p>
+            </div>
+            <div class="page_link">
+              <a href="/">Home</a>
+
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-<!--================End Home Banner Area =================-->
+    </section>
+    <!--================End Home Banner Area =================-->
 
-<!--================Single Product Area =================-->
-<div class="product_image_area">
-  <div class="container">
-    <div class="row s_product_inner">
-      <div class="col-lg-5">
-        <div class="s_product_img">
-          <!-- <div
-            id="carouselExampleIndicators"
-            class="carousel slide"
-            data-ride="carousel"
-          > -->
-            <!-- <ol class="carousel-indicators">
-              <li
-                data-target="#carouselExampleIndicators"
-                data-slide-to="0"
-                class="active"
-              >
-                <img class="img-fluid w-100"
-                  src="/productImages/<%= productDetails.image[0]%>"
-                  alt=""
-                />
-              </li>
-              <li
-                data-target="#carouselExampleIndicators"
-                data-slide-to="1"
-              >
-                <img class="img-fluid w-100"
-                src="/productImages/<%= productDetails.image[0]%>"
-                  alt=""
-                />
-              </li>
-              <li
-                data-target="#carouselExampleIndicators"
-                data-slide-to="2"
-              >
-                <img class="img-fluid w-100"
-                src="/productImages/<%= productDetails.image[0]%>"
-                  alt=""
-                />
-              </li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img
-                  class="d-block w-100"
-                  src="/productImages/<%= productDetails.image[0]%>"
-                  alt="First slide"
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  class="d-block w-100"
-                  src="/productImages/<%= productDetails.image[0]%>"
-                  alt="Second slide"
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  class="d-block w-100"
-                  src="/productImages/<%= productDetails.image[0]%>"
-                  alt="Third slide"
-                />
-              </div> -->
+    <!--================Single Product Area =================-->
+    <div class="product_image_area">
+      <div class="container">
+        <div class="row s_product_inner">
+          <div class="col-lg-5">
+            <div class="s_product_img">
+
 
 
               <div class="xzoom-container">
-                <img class="xzoom" width="100%" height="50%"  id="xzoom-default" src="/productImages/<%= productDetails.image[0]%>" xoriginal="/productImages/<%= productDetails.image[0] %>" />
-              </div> 
-               <div class="xzoom-thumbs">
-                 <a style="height: 80px; " href="/productImages/<%= productDetails.image[0]%>"><img  class="xzoom-gallery" width="80" height="80px" src="/productImages/<%= productDetails.image[0]%>" xpreview="/productImages/<%= productDetails.image[0]%>" ></a>
-                 <a href="/productImages/<%= productDetails.image[1]%>"><img  class="xzoom-gallery" width="80" height="80px" src="/productImages/<%= productDetails.image[1]%>" ></a>
-                 <a href="/productImages/<%= productDetails.image[2]%>"><img  class="xzoom-gallery" width="80" height="80px" src="/productImages/<%= productDetails.image[2]%>" ></a>
-                 <!-- <a href="/productImages/<%= productDetails.image[3]%>"><img  class="xzoom-gallery" width="80" height="80px" src="/productImages/<%= productDetails.image[3]%>" ></a> -->
-             </div>
-            <!-- </div> -->
-          </div>
-        </div>
-     
-      <div class="col-lg-6 offset-lg-1">
-        <div class="s_product_text">
-          <h3><%= productDetails.name%></h3>
-          <h2>₹<%= productDetails.price%></h2>
-          <ul class="list">
-            <li>
-              <a class="active text-decoration-none" href="#">
-                <span>Category</span> : <%= productDetails.category.name%></</a
-              >
-            </li>
-            <li>
-              <a class="text-decoration-none" href="#">
-                <span>Availability:</span>
-                <% if (productDetails.stock === 0) { %>
-                  <span class="bage bg-danger badge-x1">Out of Stock</span>
-                <% } else { %>
-                  <span class="bage bg-danger badge-x1">In Stock</span>
-                <% } %>
-              </a>
-              
-            </li>
-            <li>
-              <p>
-                <%= productDetails.description%>
-              </p>
-            </li>
-          </ul>
-          <div class="product_count">
-          </div>
-            <div class="card_area">
-              <button onclick="addToCart('<%=productDetails._id%>','<%=productDetails.price%>')" type="button" class="flex-c-m stext-101 cl0 size-101 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg" style="width: 140px; border-radius: 20px; background-color: green !important;">
-                Add to Cart
-              </button>
-            </div>
-           
-          </div>
-        </div>
-      </div>
-    </div> </div>
-  </div>
-</div>
-
-<section class="product_description_area">
-  <div class="container">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-
-      <li class="nav-item">
-        <a class="nav-link active" id="review-tab" data-toggle="tab" role="tab" aria-controls="review"
-          aria-selected="false">Reviews</a>
-      </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-
-
-
-      <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="row total_rate">
-              <div class="col-6">
-
+                <img class="xzoom" width="100%" height="50%" id="xzoom-default" src="<%= productDetails.image[0]%>"
+                  xoriginal="/productImages/<%= productDetails.image[0] %>" />
               </div>
-              <div class="col-6">
-                <div class="rating_list">
-
-
-                </div>
+              <div class="xzoom-thumbs">
+                <a style="height: 80px; " href="/productImages/<%= productDetails.image[0]%>"><img class="xzoom-gallery"
+                    width="80" height="80px" src="<%= productDetails.image[0]%>"
+                    xpreview="<%= productDetails.image[0]%>"></a>
+                <a href="/productImages/<%= productDetails.image[1]%>"><img class="xzoom-gallery" width="80"
+                    height="80px" src="<%= productDetails.image[1]%>"></a>
+                <a href="/productImages/<%= productDetails.image[2]%>"><img class="xzoom-gallery" width="80"
+                    height="80px" src="<%= productDetails.image[2]%>"></a>
+                <!-- <a href="/productImages/<%= productDetails.image[3]%>"><img  class="xzoom-gallery" width="80" height="80px" src="/productImages/<%= productDetails.image[3]%>" ></a> -->
+                          
               </div>
+              <!-- </div> -->
             </div>
-            <div class="review_list">
-              <% for (let i=0; i < productDetails.review.length; i++) { %>
-                <div class="review_item">
-                  <div class="media">
-                    <div class="d-flex">
+          </div>
 
-                     
+          <div class="col-lg-6 offset-lg-1">
+            <div class="s_product_text">
+              <h3>
+                <%= productDetails.name%>
+              </h3>
+              <h2>₹<%= productDetails.price%>
+              </h2>
+              <ul class="list">
+                <li>
+                  <a class="active text-decoration-none" href="#">
+                    <span>Category</span> : <%= productDetails.category.name%>
+                      </< /a>
+                </li>
+                <li>
+                  <a class="text-decoration-none" href="#">
+                    <span>Availability:</span>
+                    <% if (productDetails.stock===0) { %>
+                      <span class="badge bg-danger badge-x1">Out of Stock</span>
+                      <% } else { %>
+                        <span class="badge bg-success badge-x1">In Stock</span>
+                        <% } %>
+                  </a>
 
-
-                          <img class="rounded-circle img-fluid" style="width: 50px;" src=""
-                            alt="" />
-
-
-                    </div>
-                    <div class="media-body">
-                      <h4>
-                        <%= productDetails.review[i].userName %>
-                      </h4>
-                    </div>
-                  </div>
+                </li>
+                <li>
                   <p>
-                    <%= productDetails.review[i].message %>
+                    <%= productDetails.description%>
                   </p>
+                </li>
+              </ul>
+              <div class="product_count">
+
+                <div class="card_area">
+                  <button onclick="addToCart('<%=productDetails._id%>','<%=productDetails.price%>')" type="button"
+                    class="flex-c-m stext-101 cl0 size-101 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg"
+                    style="width: 140px; border-radius: 20px; background-color: green !important;">
+                    Add to Cart
+                  </button>
                 </div>
-                <% } %>
-            </div>
-
-          </div>
-          <div class="col-lg-6 mt-4">
-            <div class="review_box">
-              <h4>Add a Review</h4>
-              <% if (hasPurchasedProduct) { %>
-
-                <form class="row contact_form" action="/singleProduct?id=<%= productDetails._id %>" method="post"
-                  novalidate="novalidate">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <input type="text" class="form-control" name="name" placeholder="Your Full name" />
-                    </div>
-                  </div>
-
-
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <textarea class="form-control" name="message" rows="1" placeholder="Review"></textarea>
-                    </div>
-                  </div>
-                  <div class="col-md-12 text-right">
-                    <button class="btn btn-success" type="submit" value="submit" class="btn_3">
-                      Submit Now
-                    </button>
-                  </div>
-                </form>
-                <% } else { %>
-                  <p>You must purchase this product to leave a review.</p>
-                  <% } %>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-
-
-
-
-
-
-
-
     </div>
-  </div>
-</section>
-<br><br>
+    </div>
+    </div>
 
-<script>
-  function addToCart(proId, price) {
-    $.ajax({
-      url: '/addTocart',
-      data: {
-        productId: proId,
-        productPrice: price
-      },
-      method: "post",
-      success: (response) => {
-        if (response.success) {
-          $('.bg0').load('/wishlist .bg0')
-          console.log(response);
-          Swal.fire({
-            title: 'Added',
-            text: 'Item added to Cart',
-            icon: 'success',
-            timer: 1000,
-            showConfirmButton: false
-          })
-        } else {
-          Swal.fire({
-            text: 'Item already in Cart',
-            icon: 'info',
-            timer: 1000,
-            showConfirmButton: false
-          })
-        }
+    <section class="product_description_area">
+      <div class="container">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
 
+          <li class="nav-item">
+            <a class="nav-link active" id="review-tab" data-toggle="tab" role="tab" aria-controls="review"
+              aria-selected="false">Reviews</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+
+
+
+          <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="row total_rate">
+                  <div class="col-6">
+
+                  </div>
+                  <div class="col-6">
+                    <div class="rating_list">
+
+
+                    </div>
+                  </div>
+                </div>
+                <div class="review_list">
+                  <% for (let i=0; i < productDetails.review.length; i++) { %>
+                    <div class="review_item">
+                      <div class="media">
+                        <img class="rounded-circle mr-3" style="width: 70px;" src="" alt="">
+                        <div class="media-body">
+                          <h4 class="mt-0">
+                            <%= productDetails.review[i].userName %>
+                          </h4>
+                          <div class="rating mb-3">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                          </div>
+                          <p class="mb-4">
+                            <%= productDetails.review[i].message %>
+                          </p>
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                    <% } %>
+                </div>
+
+
+
+
+              </div>
+              <div class="col-lg-6 mt-4">
+                <div class="review_box">
+                  <h4>Add a Review</h4>
+                  <% if (hasPurchasedProduct) { %>
+                    <form action="/singleProduct?id=<%= productDetails._id %>" method="POST">
+                      <div class="form-group">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Name" required>
+                      </div>
+
+                      <div class="form-group">
+                        <textarea class="form-control" id="message" name="message" rows="5" placeholder="Your Review"
+                          required></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-success btn-block mt-3">Submit Review</button>
+                    </form>
+                    <% } else { %>
+                      <p>You must purchase this product to leave a review.</p>
+                      <% } %>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br><br>
+
+    <script>
+      function addToCart(proId, price) {
+        $.ajax({
+          url: '/addTocart',
+          data: {
+            productId: proId,
+            productPrice: price
+          },
+          method: "post",
+          success: (response) => {
+            if (response.success) {
+              $('.bg0').load('/wishlist .bg0')
+              console.log(response);
+              Swal.fire({
+                title: 'Added',
+                text: 'Item added to Cart',
+                icon: 'success',
+                timer: 1000,
+                showConfirmButton: false
+              })
+            } else {
+              Swal.fire({
+                text: 'Item already in Cart',
+                icon: 'info',
+                timer: 1000,
+                showConfirmButton: false
+              })
+            }
+
+          }
+        })
       }
-    })
-  }
-</script>
+    </script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://payalord.github.io/xZoom/js/vendor/jquery.js"></script>
-  <script type="text/javascript" src="https://payalord.github.io/xZoom/source/js/xzoom.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://payalord.github.io/xZoom/css/xzoom.css" media="all" /> 
-  <script type="text/javascript" src="https://payalord.github.io/xZoom/js/setup.js"></script>
-<%- include('../layouts/user/footer.ejs') %>
+    <script type="text/javascript" src="https://payalord.github.io/xZoom/source/js/xzoom.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://payalord.github.io/xZoom/css/xzoom.css" media="all" />
+    <script type="text/javascript" src="https://payalord.github.io/xZoom/js/setup.js"></script>
+    <%- include('../layouts/user/footer.ejs') %>

@@ -1,6 +1,6 @@
-<%- include('../layouts/header.ejs') %> 
-<%- include('../layouts/navbar.ejs') %>
-<%- include('../layouts/sidebar.ejs') %>
+<%- include('../layouts/header.ejs') %>
+  <%- include('../layouts/navbar.ejs') %>
+    <%- include('../layouts/sidebar.ejs') %>
       <div class="main-panel">
         <div class="content-wrapper">
           <div class="row">
@@ -9,8 +9,8 @@
                 <div class="card-body">
                   <h4 class="card-title">USERS</h4>
                   <div class="row justify-content-end">
-                    
-                  </div>                  
+
+                  </div>
                   <div class="table-responsive">
                     <table class="table table-striped">
                       <thead>
@@ -19,7 +19,7 @@
                             No.
                           </th>
                           <th class="text-center">
-                             Name
+                            Name
                           </th>
                           <th class="text-center">
                             Email
@@ -36,40 +36,43 @@
                         </tr>
                       </thead>
                       <tbody class="text-center">
-                        <%
-                        if(user.length > 0) {
-                          for(let i=0; i <user.length; i++){
-                            %>
-                            <tr >
-                              <td class="mt-3"><%= i+1 %></td>
-                              <td><%= user[i].name %></td>
-                              <td><%= user[i].email %></td>
-                                <td><%= user[i].mobile %></td>
-                                <td> 
-                                  <% if(user[i].status) {%>
-                                    <span class="badge bg-success">Active</span>
-                                    <td>
-                                      <a type="button" class="btn btn-outline-danger btn-sm" href="/admin/useractive?id=<%=user[i]._id%>">Block</a>
-                                    </td>
-                                    <% }else{%>
-                                    <span class="badge bg-danger">Inactive</span>
-                                    
-                                    <td>
-                                      <a type="button" class="btn btn-outline-success btn-sm" href="/admin/useractive?id=<%=user[i]._id%>">UnBlock</a>
-                                    </td>
-                                    <% } %>                     
-          
-                          </tr>
-                          <%
-                          }
-                        }else{
-                          %>
-                          <tr> 
-                            <td colspan = "5" class="alert alert-danger">Category Not Found </td>
+                        <% if(user.length> 0) {
+                          for(let i=0; i <user.length; i++){ %>
+                            <tr>
+                              <td class="mt-3">
+                                <%= i+1 %>
+                              </td>
+                              <td>
+                                <%= user[i].name %>
+                              </td>
+                              <td>
+                                <%= user[i].email %>
+                              </td>
+                              <td>
+                                <%= user[i].mobile %>
+                              </td>
+                              <td>
+                                <% if(user[i].status) {%>
+                                  <span class="badge bg-success">Active</span>
+                              <td>
+                                <a type="button" class="btn btn-outline-danger btn-sm"
+                                  href="/admin/useractive?id=<%=user[i]._id%>">Block</a>
+                              </td>
+                              <% }else{%>
+                                <span class="badge bg-danger">Inactive</span>
+
+                                <td>
+                                  <a type="button" class="btn btn-outline-success btn-sm"
+                                    href="/admin/useractive?id=<%=user[i]._id%>">UnBlock</a>
+                                </td>
+                                <% } %>
+
                             </tr>
-                            <%
-                        }
-                        %>
+                            <% } }else{ %>
+                              <tr>
+                                <td colspan="5" class="alert alert-danger">Category Not Found </td>
+                              </tr>
+                              <% } %>
                       </tbody>
                     </table>
                   </div>
@@ -77,25 +80,25 @@
               </div>
             </div>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
-<script>
-    const deleteButtons = document.querySelectorAll('.delete-btn');
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            const deleteUrl = button.getAttribute('href');
-            swal({
-                title: "Are you sure?",
-                text: "Once deleted, you will not be able to recover this user!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((willDelete) => {
-                if (willDelete) {
-                    window.location.href = deleteUrl;
-                }
-            });
-        });
-    });
-</script>
-<%- include('../layouts/footer.ejs') %>
+            <script>
+              const deleteButtons = document.querySelectorAll('.delete-btn');
+              deleteButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                  event.preventDefault();
+                  const deleteUrl = button.getAttribute('href');
+                  swal({
+                    title: "Are you sure?",
+                    text: "Once deleted, you will not be able to recover this user!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                  })
+                    .then((willDelete) => {
+                      if (willDelete) {
+                        window.location.href = deleteUrl;
+                      }
+                    });
+                });
+              });
+            </script>
+            <%- include('../layouts/footer.ejs') %>

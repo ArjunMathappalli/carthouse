@@ -1,230 +1,223 @@
- <%- include('../layouts/user/header.ejs') %>
- <%- include('../layouts/user/navbar.ejs') %>
+<%- include('../layouts/user/header.ejs') %>
+  <%- include('../layouts/user/navbar.ejs') %>
 
- <!--================Home Banner Area =================-->
- 
- <div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="3000">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <% for (var i = 0; i < BannerData.length; i++) { %>
-      <div class="carousel-item <%= i === 0 ? "active" : "" %>">
-        <img src="/productImages/<%= BannerData[i].image %>" class="d-block w-100" alt="...">
-        <div class="carousel-caption d-none d-md-block">
-          <p class="sub text-uppercase">men Collection</p>
-          
-          
-          <a class="main_btn mt-40" href="#">View Collection</a>
-        </div>
+    <!--================Home Banner Area =================-->
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="3000">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
       </div>
-    <% } %>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+      <div class="carousel-inner">
+        <% for (var i=0; i < BannerData.length; i++) { %>
+          <div class="carousel-item <%= i === 0 ? " active" : "" %>">
+            <img src="/productImages/<%= BannerData[i].image %>" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <p class="sub text-uppercase">men Collection</p>
 
- <!-- <section class="home_banner_area mb-40">
-  <div class="banner_inner d-flex align-items-center">
-    <div class="container">
-      <div class="banner_content row">
-        <div class="col-lg-12">
-          <p class="sub text-uppercase">men Collection</p>
-          <h3><span>Show</span> Your <br />Personal <span>Style</span></h3>
-          <h4>Fowl saw dry which a above together place.</h4>
-          <a class="main_btn mt-40" href="#">View Collection</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
 
-<!--================End Home Banner Area =================-->
-
-<!-- Start feature Area -->
-<br><br>
-<section class="feature-area section_gap_bottom_custom">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 col-md-6">
-        <div class="single-feature">
-          <a href="#" class="title text-decoration-none">
-            <i class="flaticon-money"></i>
-            <h3>Money back gurantee</h3>
-          </a>
-          <p>Shall open divide a one</p>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6">
-        <div class="single-feature">
-          <a href="#" class="title text-decoration-none">
-            <i class="flaticon-truck"></i>
-            <h3>Free Delivery</h3>
-          </a>
-          <p>Shall open divide a one</p>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6">
-        <div class="single-feature">
-          <a href="#" class="title text-decoration-none">
-            <i class="flaticon-support"></i>
-            <h3>Alway support</h3>
-          </a>
-          <p>Shall open divide a one</p>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6">
-        <div class="single-feature">
-          <a href="#" class="title text-decoration-none">
-            <i class="flaticon-blockchain"></i>
-            <h3>Secure payment</h3>
-          </a>
-          <p>Shall open divide a one</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- End feature Area -->
-
-<!--================ Feature Product Area =================-->
-<section class="feature_product_area section_gap_bottom_custom">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-12">
-        <div class="main_title">
-          <h2><span>Featured product</span></h2>
-          <p>Bring called seed first of third give itself now ment</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <% productInfo.forEach(function(x,index) { %>
-        <% if(x.status) { %>
-        <div class="col-lg-4 col-md-6">
-          <div class="single-product">
-            <div class="product-img">
-              <img class="img-fluid w-100" src="/productImages/<%= x.image[0]%>" alt="" />
-              <div class="p_icon">
-                <a href="/singleProduct?id=<%= x._id %>">
-                  <i class="ti-eye"></i>
-                </a>
-                <a href="#"
-                <button  onclick="addToWishlist('<%= x._id %>')">
-                  <i class="ti-heart"></i>
-                </button>
-                </a>
-                <a onclick="addToCart('<%=x._id%>','<%=x.stock%>','<%=x.price%>')" type="button" class="flex-c-m stext-10 size-8 bor13 hov-btn3  trans-04 pointer m-tb-10">
-                  <i class="ti-shopping-cart"></i>
-                </a>
-              </div>
+              <a class="main_btn mt-40" href="#">View Collection</a>
             </div>
-            <div class="product-btm">
-              <a  class="d-block">
-                <h4><%= x.name %></h4>
+          </div>
+          <% } %>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+
+    <!--================End Home Banner Area =================-->
+
+    <!-- Start feature Area -->
+    <br><br>
+    <section class="feature-area section_gap_bottom_custom">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="single-feature">
+              <a href="#" class="title text-decoration-none">
+                <i class="flaticon-money"></i>
+                <h3>Money back gurantee</h3>
               </a>
-              <div class="mt-3">
-                <span class="mr-4">₹ <%= x.price %></span>
-              </div>
+              <p>Shall open divide a one</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="single-feature">
+              <a href="#" class="title text-decoration-none">
+                <i class="flaticon-truck"></i>
+                <h3>Free Delivery</h3>
+              </a>
+              <p>Shall open divide a one</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="single-feature">
+              <a href="#" class="title text-decoration-none">
+                <i class="flaticon-support"></i>
+                <h3>Alway support</h3>
+              </a>
+              <p>Shall open divide a one</p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6">
+            <div class="single-feature">
+              <a href="#" class="title text-decoration-none">
+                <i class="flaticon-blockchain"></i>
+                <h3>Secure payment</h3>
+              </a>
+              <p>Shall open divide a one</p>
             </div>
           </div>
         </div>
-        <% } %>
-      <% }); %>
-</section>
-<script>
-  function addToCart(proId,stock,price) {
-    // Check the stock availability of the product
-    if (`${stock}` > 0) {
-      // Stock is available, add the product to the cart
-      $.ajax({
-        url: '/addToCart',
-        data: {
-          productId: proId,
-          productPrice: price
-        },
-        method: "post",
-        success: (response) => {
-          if (response.success) {
-            $('.bg0').load('/wishlist .bg0')
-            console.log(response);
-            Swal.fire({
-              title: 'Added',
-              text: 'Item added to Cart',
-              icon: 'success',
-              timer: 1000,
-              showConfirmButton: false
-            })
-          } else {
-            Swal.fire({
-              text: 'Item already in Cart',
-              icon: 'info',
-              timer: 1000,
-              showConfirmButton: false
-            })
-          }
-        }
-      })
-    } else {
-      // Stock is not available, show an error message
-      Swal.fire({
-        text: 'Item is out of stock',
-        icon: 'error',
-        timer: 1000,
-        showConfirmButton: false
-      })
-    }
-  }
-  </script>
+      </div>
+    </section>
 
+    <!-- End feature Area -->
 
-<script>
-  function addToWishlist(proId) {
-    $.ajax({
-      url: '/addToWishlist',
-      data: {
-        productId: proId
-      },
-      method: "post",
-      success: (response) => {
-        if (response.success) {
-          $('.table-shopping-cart').load('/wishlist .table-shopping-cart')
-          console.log(response);
-          Swal.fire({
-            title: 'Added',
-            text: 'Item added to wishlist',
-            icon: 'success',
-            timer: 1000,
-            showConfirmButton: false
+    <!--================ Feature Product Area =================-->
+    <section class="feature_product_area section_gap_bottom_custom">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-12">
+            <div class="main_title">
+              <h2><span>Featured product</span></h2>
+              <p>Bring called seed first of third give itself now ment</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <% productInfo.forEach(function(x,index) { %>
+            <% if(x.status) { %>
+              <div class="col-lg-4 col-md-6">
+                <div class="single-product">
+                  <div class="product-img">
+                    <img class="img-fluid w-100" src="<%= x.image[0]%>" alt="" />
+                    <div class="p_icon">
+                      <a href="/singleProduct?id=<%= x._id %>">
+                        <i class="ti-eye"></i>
+                      </a>
+                      <a href="#" <button onclick="addToWishlist('<%= x._id %>')">
+                        <i class="ti-heart"></i>
+                        </button>
+                      </a>
+                      <a onclick="addToCart('<%=x._id%>','<%=x.stock%>','<%=x.price%>')" type="button"
+                        class="flex-c-m stext-10 size-8 bor13 hov-btn3  trans-04 pointer m-tb-10">
+                        <i class="ti-shopping-cart"></i>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="product-btm">
+                    <a class="d-block">
+                      <h4>
+                        <%= x.name %>
+                      </h4>
+                    </a>
+                    <div class="mt-3">
+                      <span class="mr-4">₹ <%= x.price %></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+                <% }); %>
+    </section>
+    <script>
+      function addToCart(proId, stock, price) {
+        // Check the stock availability of the product
+        if (`${stock}` > 0) {
+          // Stock is available, add the product to the cart
+          $.ajax({
+            url: '/addToCart',
+            data: {
+              productId: proId,
+              productPrice: price
+            },
+            method: "post",
+            success: (response) => {
+              if (response.success) {
+                $('.bg0').load('/wishlist .bg0')
+                console.log(response);
+                Swal.fire({
+                  title: 'Added',
+                  text: 'Item added to Cart',
+                  icon: 'success',
+                  timer: 1000,
+                  showConfirmButton: false
+                })
+              } else {
+                Swal.fire({
+                  text: 'Item already in Cart',
+                  icon: 'info',
+                  timer: 1000,
+                  showConfirmButton: false
+                })
+              }
+            }
           })
         } else {
+          // Stock is not available, show an error message
           Swal.fire({
-            text: 'Item already in wishlist',
-            icon: 'info',
+            text: 'Item is out of stock',
+            icon: 'error',
             timer: 1000,
             showConfirmButton: false
           })
         }
-        console.log(response);
       }
-    })
-  }
-</script>
+    </script>
 
-</section>
-<!--================ End Feature Product Area =================-->
 
-<%- include('../layouts/user/footer.ejs') %>
+    <script>
+      function addToWishlist(proId) {
+        $.ajax({
+          url: '/addToWishlist',
+          data: {
+            productId: proId
+          },
+          method: "post",
+          success: (response) => {
+            if (response.success) {
+              $('.table-shopping-cart').load('/wishlist .table-shopping-cart')
+              console.log(response);
+              Swal.fire({
+                title: 'Added',
+                text: 'Item added to wishlist',
+                icon: 'success',
+                timer: 1000,
+                showConfirmButton: false
+              })
+            } else {
+              Swal.fire({
+                text: 'Item already in wishlist',
+                icon: 'info',
+                timer: 1000,
+                showConfirmButton: false
+              })
+            }
+            console.log(response);
+          }
+        })
+      }
+    </script>
+
+    </section>
+    <!--================ End Feature Product Area =================-->
+
+    <%- include('../layouts/user/footer.ejs') %>

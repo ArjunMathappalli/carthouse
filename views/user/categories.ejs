@@ -1,129 +1,136 @@
-<%-include('../layouts/user/header.ejs') %>
-<%-include('../layouts/user/navbar.ejs') %>
-<!-- Product -->
-<div class="bg0 m-t-23 p-b-140">
-    <div class="container">
-      <div class="flex-w flex-sb-m p-b-52">
-        <div class="flex-w m-l-auto  m-t-60">
-        </div>
-        <!-- Search product -->
-        <div class="dis-none panel-search w-full p-t-10 p-b-15">
-          <div class="bor8 dis-flex p-l-15">
-            <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-              <i class="zmdi zmdi-search"></i>
-            </button>
-            <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+<%-include('.. /layouts/user/header.ejs') %>
+  <%-include('.. /layouts/user/navbar.ejs') %>
+    <!-- Product -->
+    <div class="bg0 m-t-23 p-b-140">
+      <div class="container">
+        <div class="flex-w flex-sb-m p-b-52">
+          <div class="flex-w m-l-auto  m-t-60">
           </div>
-        </div>
-      </div>
-  
-      <div class="row isotope-grid  ">
-        <% Product.forEach((x)=>{%>
-        <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 d-flex isotope-item women" style="box-shadow: #222;">
-          <div class="block2 width:200px;height: 300px;bg-success m-lr-auto  m-t-23">
-            <div class="block2-pic hov-img0">
-              <img width="200px" height="200px" src="/productImages/<%= x.image[0] %>" alt="IMG-PRODUCT">
-              <a href="/productDetails/<%= x._id %>" type="button" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 ">
-                Quick View
-              </a>
-            </div>
-  
-            <div class="block2-txt flex-w flex-t p-t-14">
-              <div class="block2-txt-child1 flex-col-l ">
-                <a href="/productDetails/<%= x._id %>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                  <%=x.name%>
-                </a>
-                <span class="stext-105 cl3">
-                  ₹ <%=x.price%>
-                </span>
-              </div>
-  
-  
-  
-              <div class="block2-txt-child2 flex-r p-t-3">
-                <% if(typeof user!=="undefined"){ %>
-                <a onclick="addToWishlist('<%= x._id %>')" href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                  <img class="icon-heart1 dis-block trans-04" src="/user/images/icons/icon-heart-01.png" alt="ICON">
-                  <img class="icon-heart2 dis-block trans-04 ab-t-l" src="/user/images/icons/icon-heart-02.png" alt="ICON">
-                </a>
-                <% }else{ %>
-                <a href="/login" class="btn-addwish-b2  pos-relative ">
-                  <img class="icon-heart1  trans-04" src="/user/images/icons/icon-heart-01.png" alt="ICON">
-                  <img class="icon-heart2  trans-04 ab-t-l" src="/user/images/icons/icon-heart-02.png" alt="ICON">
-                </a>
-                <% } %>
-              </div>
+          <!-- Search product -->
+          <div class="dis-none panel-search w-full p-t-10 p-b-15">
+            <div class="bor8 dis-flex p-l-15">
+              <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+                <i class="zmdi zmdi-search"></i>
+              </button>
+              <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
             </div>
           </div>
         </div>
-        <%}) %>
-      </div>
-      <div class="flex-c-m flex-w w-full p-t-45">
+
+        <div class="row isotope-grid  ">
+          <% Product.forEach((x)=>{%>
+            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 d-flex isotope-item women" style="box-shadow: #222;">
+              <div class="block2 width:200px;height: 300px;bg-success m-lr-auto  m-t-23">
+                <div class="block2-pic hov-img0">
+                  <img width="200px" height="200px" src="/productImages/<%= x.image[0] %>" alt="IMG-PRODUCT">
+                  <a href="/productDetails/<%= x._id %>" type="button"
+                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 ">
+                    Quick View
+                  </a>
+                </div>
+
+                <div class="block2-txt flex-w flex-t p-t-14">
+                  <div class="block2-txt-child1 flex-col-l ">
+                    <a href="/productDetails/<%= x._id %>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                      <%=x.name%>
+                    </a>
+                    <span class="stext-105 cl3">
+                      ₹ <%=x.price%>
+                    </span>
+                  </div>
+
+
+
+                  <div class="block2-txt-child2 flex-r p-t-3">
+                    <% if(typeof user!=="undefined" ){ %>
+                      <a onclick="addToWishlist('<%= x._id %>')" href="#"
+                        class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                        <img class="icon-heart1 dis-block trans-04" src="/user/images/icons/icon-heart-01.png"
+                          alt="ICON">
+                        <img class="icon-heart2 dis-block trans-04 ab-t-l" src="/user/images/icons/icon-heart-02.png"
+                          alt="ICON">
+                      </a>
+                      <% }else{ %>
+                        <a href="/login" class="btn-addwish-b2  pos-relative ">
+                          <img class="icon-heart1  trans-04" src="/user/images/icons/icon-heart-01.png" alt="ICON">
+                          <img class="icon-heart2  trans-04 ab-t-l" src="/user/images/icons/icon-heart-02.png"
+                            alt="ICON">
+                        </a>
+                        <% } %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%}) %>
+        </div>
+        <div class="flex-c-m flex-w w-full p-t-45">
+        </div>
       </div>
     </div>
-  </div>
-  
-  
-  
-  
-  <div class="card-body">
-    <% if(typeof productCount == "undefined"){%>
-      <%}else{%>
-  
-    <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-  
-        <!-- Previous page button -->
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-          </a>
-        </li>
-  
-        <!-- Page numbers -->
-        <% for(let i=1;i<=productCount ;i++){ %>
-        <li class="page-item"><a class="page-link" href="?page=<%=i %>"><%= i %></a></li>
-        <% } %>
-  
-        <!-- Next page button -->
-        <li class="page-item">
-          <a class="page-link" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <%}%>
-  </div>
-  
-  
-  
-  
-  <!-- Back to top -->
-  <div class="btn-back-to-top" id="myBtn">
-    <span class="symbol-btn-back-to-top">
-      <i class="zmdi zmdi-chevron-up"></i>
-    </span>
-  </div>
-  <!-- Modal1 -->
-  
-  
-  
-  <!-- for wishlist////////////////// -->
-  <script>
-    function addToWishlist(proId) {
-      $.ajax({
-        url: '/addToWishlist',
-        data: {
-          productId: proId
-        },
-        method: "post",
-        success: (response) => {
-          console.log(response);
-        }
-      })
-    }
-  </script>
-<%-include('../layouts/user/footer.ejs') %>
+
+
+
+
+    <div class="card-body">
+      <% if(typeof productCount=="undefined" ){%>
+        <%}else{%>
+
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+
+              <!-- Previous page button -->
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+
+              <!-- Page numbers -->
+              <% for(let i=1;i<=productCount ;i++){ %>
+                <li class="page-item"><a class="page-link" href="?page=<%=i %>">
+                    <%= i %>
+                  </a></li>
+                <% } %>
+
+                  <!-- Next page button -->
+                  <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+            </ul>
+          </nav>
+          <%}%>
+    </div>
+
+
+
+
+    <!-- Back to top -->
+    <div class="btn-back-to-top" id="myBtn">
+      <span class="symbol-btn-back-to-top">
+        <i class="zmdi zmdi-chevron-up"></i>
+      </span>
+    </div>
+    <!-- Modal1 -->
+
+
+
+    <!-- for wishlist////////////////// -->
+    <script>
+      function addToWishlist(proId) {
+        $.ajax({
+          url: '/addToWishlist',
+          data: {
+            productId: proId
+          },
+          method: "post",
+          success: (response) => {
+            console.log(response);
+          }
+        })
+      }
+    </script>
+    <%-include('.. /layouts/user/footer.ejs') %>
