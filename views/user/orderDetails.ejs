@@ -76,6 +76,10 @@
                             <div class="d-flex justify-content-between ">
                               <p class="text mb-0">Invoice Number : <%= order.orderId %>
                               </p>
+                              <div class="d-flex justify-content-between">
+                                <p class="text mb-0">quantity : <%=order.quantity %>
+                                </p>
+                              </div>
                               <% if( order.discount !==null ){ %>
                                 <p class="text-muted mb-0">Applied coupon :<%=order.coupon %>
                                 </p>
@@ -102,16 +106,8 @@
                           </div>
                           <input style="padding:5px;" class="btn btn-success" value="Invoice" type="button"
                             onclick="myFunction()"></input>
-
-
                     </div>
-
-
-
-
                   </div>
-
-
                 </div>
               </div>
             </div>
@@ -235,7 +231,7 @@
           "key": "rzp_test_J8ft2g2cBjOM7u", // Enter the Key ID generated from the Dashboard
           "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
           "currency": "INR",
-          "name": "ShoeCart", //your business name
+          "name": "carthouse", //your business name
           "description": "Test Transaction",
           "image": "https://example.com/your_logo",
           "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
@@ -245,9 +241,9 @@
 
           },
           "prefill": {
-            "name": "Adhil Bin Ashraf", //your customer's name
-            "email": "adhilbinashraf3000@example.com",
-            "contact": "9000090000"
+            "name": "Arjun", //your customer's name
+            "email": "arjun1997308@gmail.com",
+            "contact": "9447597412"
           },
           "notes": {
             "address": "Razorpay Corporate Office"

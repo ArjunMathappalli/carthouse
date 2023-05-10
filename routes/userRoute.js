@@ -58,8 +58,7 @@ user_route.post("/singleProduct",  productController.addReview);
 user_route.get('/allProducts',userController.allProducts)
 
 
-//CATEGORYWISE //
- user_route.get('/category/:id',userController.categoryFilter)
+//filter search
 
 user_route.post('/shopFilter',userController.filterProduct)
 
@@ -125,10 +124,18 @@ user_route.post('/returnOrder',auth.isLogin,userController.returnOrder);
 //COUPON ROUTES //
 user_route.post('/applycoupon',auth.isLogin,couponController.applycoupon)
 
-user_route.post('/removeCoupon', auth.isLogin, userController.removecoupon);
+
 
 
 //PAYMENT VERIFICATION//
 user_route.post('/verifPpayment',auth.isLogin,userController.verifPpayment)
 
+//wallet
+user_route.get('/walletAmount',auth.isLogin,userController.walletAmount)
+user_route.get('/wallet',auth.isLogin,userController.wallet)
+
+user_route.get('/editReview', auth.isLogin,  productController.editReview);
+
+user_route.post('/editReview', auth.isLogin,  productController.updatedReview);
+user_route.get('/deleteReview', auth.isLogin, productController.deleteReview)
 module.exports = user_route;

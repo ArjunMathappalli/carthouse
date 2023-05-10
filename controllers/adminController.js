@@ -7,6 +7,7 @@ const Banner = require("../models/bannerModel");
 require("dotenv").config();
 const categoryData = require("../models/categoryModel");
 const categoryModel = require("../models/categoryModel");
+
 const loadLogin = async (req, res) => {
   try {
     res.render("adminLogin");
@@ -30,7 +31,6 @@ const loadDashboard = async (req, res, next) => {
         model: categoryModel,
       },
     });
-
     const categoryCount = {};
     ord.forEach((order) => {
       order.product.forEach((product) => {
@@ -40,10 +40,8 @@ const loadDashboard = async (req, res, next) => {
         } else {
           categoryCount[category] = 1;
         }
-        console.log(order.product);
       });
     });
-
     const sortedCategoryCount = Object.entries(categoryCount).sort(
       (a, b) => b[1] - a[1]
     );
@@ -51,7 +49,6 @@ const loadDashboard = async (req, res, next) => {
     const categoryNames = sortedCategoryCount.map((categoryCount) => {
       return categoryCount[0];
     });
-
     const revenueOfTheWeekly = await order.aggregate([
       {
         $match: {
@@ -73,7 +70,6 @@ const loadDashboard = async (req, res, next) => {
     const weeklyRevenue = revenueOfTheWeekly.map((item) => {
       return item.Revenue;
     });
-
     const weeklySales = await order.aggregate([
       {
         $match: {
@@ -104,7 +100,7 @@ const loadDashboard = async (req, res, next) => {
         },
       },
     ]);
-    console.log(weeklySales);
+ 
     const date = weeklySales.map((item) => {
       return item._id;
     });
@@ -130,7 +126,7 @@ const loadDashboard = async (req, res, next) => {
   }
 };
 
-const verifyLogin = async (req, res) => {
+const verifyLogin = async (req, res,next) => {
   try {
     const admEmail = process.env.ADMIN_EMAIL;
     const admPass = process.env.ADMIN_PASS;
@@ -148,6 +144,7 @@ const verifyLogin = async (req, res) => {
     next(error.message);
   }
 };
+
 const loadOrders = async (req, res, next) => {
   try {
     const orderData = await order
@@ -181,7 +178,7 @@ const logOut = async (req, res, next) => {
     req.session.admin_id = "";
     res.redirect("/admin");
   } catch (error) {
-    console.log(error.message);
+    next(error.message);
   }
 };
 
@@ -197,6 +194,7 @@ const orderDetails = async (req, res) => {
     console.log(error.message);
   }
 };
+
 //load sale
 const Sales = async (req, res) => {
   try {
@@ -205,6 +203,7 @@ const Sales = async (req, res) => {
     console.log(error.message);
   }
 };
+
 //load sales report
 const salesReport = async (req, res, next) => {
   try {
@@ -270,16 +269,18 @@ const newBanner = async (req, res, next) => {
     next(error.message);
   }
 };
+
 const loadeditBanner = async (req, res, next) => {
   try {
     const id = req.query.id;
     const bannerdata = await Banner.findOne({ _id: id });
-    console.log(bannerdata);
+   
     res.render("editBanner", { banner: bannerdata });
   } catch (error) {
-    console.log(error.message);
+    next(error.message);
   }
 };
+
 const updatebanner = async (req, res) => {
   try {
     const id = req.query.id;

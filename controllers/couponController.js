@@ -60,16 +60,17 @@ const newCoupon = async (req, res) => {
 const applycoupon = async (req, res) => {
   try {
     const { total, code } = req.body;
-    console.log(total, code);
     const Code = code.toUpperCase();
+    console.log(Code);
     let user = req.session.user_id;
-    console.log(user);
-    const data = await couponData.findOne({ code: code });
-    const Codee = data.code;
+    const data = await couponData.findOne({ code: Code });
+    console.log(data);
+    
     if (data) {
       console.log("check1");
+      const Codee = data.code;
       const used = await couponData.findOne({
-        code: Codee,
+        code: Code,
         userUsed: { $in: [user] },
       });
       console.log(used);
@@ -81,6 +82,7 @@ const applycoupon = async (req, res) => {
         const today = Date.now();
         if (today <= data.expirydate) {
           console.log("check4");
+          console.log("Min Purchase Amount: ", data.minPurchaseAmount);
           if (data.minPurchaseAmount <= total) {
             console.log("check5");
             let discountValue = (total * data.percentage) / 100;

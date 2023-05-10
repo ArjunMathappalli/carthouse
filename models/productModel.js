@@ -14,6 +14,9 @@ const productSchema = new mongoose.Schema({
         ref:"Category",
         required:true
   },
+  catName:{
+    type:String,
+  },
   description:{
     type:String,
     required:true
@@ -34,8 +37,12 @@ const productSchema = new mongoose.Schema({
   },
   review: [
     {
-      userName: { type: String },
-      message: { type: String },
+      userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        reqired:true
+      },
+      review: { type: String },
     },
   ],
 })

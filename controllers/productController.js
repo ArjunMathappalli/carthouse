@@ -42,22 +42,28 @@ const addProduct = async (req, res, next) => {
         const result = await cloudinary.uploader.upload(file.path);
         imagearray.push(result.secure_url);
       } else {
-        res.render("addproduct", { message: "Enter Valid Image" });
+        res.redirect("addproduct", { message: "Enter Valid Image" });
       }
     }
+    const categoryfind = await Category.find({ _id: req.body.category });
+    let categoryName = categoryfind[0].name;
+    console.log(categoryfind);
+    console.log(categoryName, "asdfggh");
     const Product = new product({
       name: req.body.name,
       price: req.body.price,
       description: req.body.description,
       image: imagearray,
       category: req.body.category,
+      catName: categoryName,
       stock: req.body.stock,
     });
+
     const productData = await Product.save();
     if (productData) {
       res.redirect("/admin/products");
     } else {
-      res.render("addproduct", { message: "action failed" });
+      res.redirect("addproduct", { message: "action failed" });
     }
   } catch (error) {
     console.log(error.message);
@@ -105,7 +111,7 @@ const updateProduct = async (req, res) => {
     req.body.stock == "" ||
     req.body.price == ""
   ) {
-    res.render("editproduct", {
+    res.redirect("editproduct", {
       productdata: productData,
       categorydata: categoryData,
       message: "All Fields Are Required",
@@ -116,9 +122,7 @@ const updateProduct = async (req, res) => {
         for (file of req.files) {
           productData.image.push(file.filename);
         }
-        console.log(productData.image);
       }
-      console.log("hwhwdhd");
 
       await product.updateOne(
         { _id: id },
@@ -162,12 +166,28 @@ const productControl = async (req, res) => {
 const productDetails = async (req, res, next) => {
   const user = req.session.user_id;
   const productId = req.query.id;
-  const session = req.session.user_id;
+  const session = req.session.user_id._id;
+  console.log(session);
   const productInfo = await product
     .findOne({ _id: productId })
+    .populate("review.userId")
     .populate("category");
   try {
-    const userData = await User.findOne({});
+    const reviewData = productInfo.review;
+    const reviewList = [];
+    // Loop through each review
+    for (let i = 0; i < reviewData.length; i++) {
+      const review = reviewData[i];
+      if (review.userId._id) {
+        const isEditable = review.userId._id.toString() === session.toString();
+        const reviewItem = {
+          review: review.review,
+          isEditable: isEditable,
+        };
+        reviewList.push(reviewItem);
+      }
+    }
+    const userData = await User.findOne({ _id: user });
     const order = await Orders.findOne({
       userId: session,
       "product.productId": productId,
@@ -177,6 +197,7 @@ const productDetails = async (req, res, next) => {
       user: userData,
       productDetails: productInfo,
       hasPurchasedProduct,
+      reviewList,
     });
   } catch (error) {
     next(error.message);
@@ -187,7 +208,6 @@ const productDetails = async (req, res, next) => {
 const addReview = async (req, res) => {
   try {
     const session = req.session.user_id;
-    console.log(session._id + "nnnnnnnnnnnnnnnnnnnnnnnnnnn");
     const name = req.body.name;
     const review = req.body.message;
     const productId = req.query.id;
@@ -207,7 +227,6 @@ const addReview = async (req, res) => {
           "You can't review this product,purchase this product and make review",
       });
     } else {
-      console.log(productId);
       const products = await product.findById({ _id: productId });
 
       if (!products.reviews) {
@@ -218,24 +237,81 @@ const addReview = async (req, res) => {
         .findOneAndUpdate(
           { _id: productId },
           {
-            $push: {
-              review: {
-                userName: name,
-                message: review,
-              },
-            },
+            $push: { review: { userId: session, review: review } },
           },
           { new: true }
         )
-        .then((updatedProduct) => {
-          console.log("Product updated:", updatedProduct);
-        })
+        .then((updatedProduct) => {})
         .catch((err) => {
           console.error("Error updating product:", err);
         });
 
       res.redirect("/singleProduct?id=" + productId);
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const editReview = async (req, res) => {
+  try {
+    const productId = req.query.id;
+    const index = req.query.index;
+    const products = await product.findById({ _id: productId });
+    const review = products.review[index];
+    res.render("Editreview", {
+      products,
+      review,
+      session: req.session.user_id._id,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const updatedReview = async (req, res) => {
+  try {
+    const productId = req.body.id;
+    const reviewIndex = req.body.index;
+    const reviewData = {
+      review: req.body.message,
+    };
+    const updatedProduct = await product.findOneAndUpdate(
+      {
+        _id: productId,
+        "review._id": reviewIndex,
+      },
+      {
+        $set: {
+          "review.$.review": reviewData.review,
+        },
+      },
+      {
+        new: true,
+      }
+    );
+
+    if (updatedProduct) {
+      res.redirect("/singleProduct?id=" + productId);
+    } else {
+      res.status(404).send("Product not found");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+const deleteReview = async (req, res) => {
+  try {
+    const productId = req.query.id;
+    const index = req.query.index;
+    const deleteReview = await product.updateOne(
+      { _id: productId },
+      { $unset: { [`review.${index}`]: "" } }
+    );
+    await product.updateOne({ _id: productId }, { $pull: { review: null } });
+    res.redirect("/singleProduct?id=" + productId);
   } catch (error) {
     console.log(error);
   }
@@ -251,4 +327,7 @@ module.exports = {
   productControl,
   productDetails,
   addReview,
+  updatedReview,
+  editReview,
+  deleteReview,
 };

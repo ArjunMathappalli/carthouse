@@ -30,15 +30,15 @@
 
               <div class="xzoom-container">
                 <img class="xzoom" width="100%" height="50%" id="xzoom-default" src="<%= productDetails.image[0]%>"
-                  xoriginal="/productImages/<%= productDetails.image[0] %>" />
+                  xoriginal="<%= productDetails.image[0] %>" />
               </div>
               <div class="xzoom-thumbs">
-                <a style="height: 80px; " href="/productImages/<%= productDetails.image[0]%>"><img class="xzoom-gallery"
+                <a style="height: 80px; " href="<%= productDetails.image[0]%>"><img class="xzoom-gallery"
                     width="80" height="80px" src="<%= productDetails.image[0]%>"
                     xpreview="<%= productDetails.image[0]%>"></a>
-                <a href="/productImages/<%= productDetails.image[1]%>"><img class="xzoom-gallery" width="80"
+                <a href="<%= productDetails.image[1]%>"><img class="xzoom-gallery" width="80"
                     height="80px" src="<%= productDetails.image[1]%>"></a>
-                <a href="/productImages/<%= productDetails.image[2]%>"><img class="xzoom-gallery" width="80"
+                <a href="<%= productDetails.image[2]%>"><img class="xzoom-gallery" width="80"
                     height="80px" src="<%= productDetails.image[2]%>"></a>
                 <!-- <a href="/productImages/<%= productDetails.image[3]%>"><img  class="xzoom-gallery" width="80" height="80px" src="/productImages/<%= productDetails.image[3]%>" ></a> -->
                           
@@ -80,11 +80,10 @@
               <div class="product_count">
 
                 <div class="card_area">
-                  <button onclick="addToCart('<%=productDetails._id%>','<%=productDetails.price%>')" type="button"
-                    class="flex-c-m stext-101 cl0 size-101 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg"
-                    style="width: 140px; border-radius: 20px; background-color: green !important;">
-                    Add to Cart
-                  </button>
+                  <button onclick="addToCart('<%=productDetails._id%>','<%=productDetails.price%>')" style="background-color: green; color: white; margin-right: -96px; padding: 12px 20px; border-radius: 20px; border: none; font-size: 15px; font-weight: bold; ">AddtoCart</button>
+
+
+
                 </div>
               </div>
             </div>
@@ -129,25 +128,28 @@
                         <img class="rounded-circle mr-3" style="width: 70px;" src="" alt="">
                         <div class="media-body">
                           <h4 class="mt-0">
-                            <%= productDetails.review[i].userName %>
+                            <%= productDetails.review[i].userId.name %>
                           </h4>
-                          <div class="rating mb-3">
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star checked"></span>
-                            <span class="fa fa-star"></span>
-                            <span class="fa fa-star"></span>
-                          </div>
+                         
                           <p class="mb-4">
-                            <%= productDetails.review[i].message %>
+                            <%= productDetails.review[i].review %>
                           </p>
                           <hr>
                         </div>
                       </div>
+                      <% if (reviewList[i].isEditable) { %>
+                        <div class="review-buttons">
+                            <a type="button" href="/editreview?index=<%= i %>&id=<%= productDetails._id %>">
+                            <i style="color: rgb(90, 130, 240);" class=" fa fa-solid fa-edit"></i></a>
+                          <a type="button" href="/deleteReview?index=<%= i %>&id=<%= productDetails._id %>"><i style="color: rgb(235, 58, 58);" class=" fa fa-solid fa-trash"></i></a>
+                        </div>
+                      <% } %>
                     </div>
+                    
                     <% } %>
+                   
                 </div>
-
+               
 
 
 

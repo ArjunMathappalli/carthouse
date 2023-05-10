@@ -1,5 +1,4 @@
 <%- include('../layouts/user/header.ejs') %>
-
   <style>
     .left_sidebar_area {
       position: sticky;
@@ -48,8 +47,8 @@
               <p>Very us move be blessed multiply night</p>
             </div>
             <div class="page_link">
-              <a href="index.html">Home</a>
-              <a href="category.html">Shop</a>
+              <a href="/">Home</a>
+              <a href="/allProducts">Shop</a>
 
             </div>
           </div>
@@ -111,8 +110,6 @@
             <input style="margin-left: 29px;" onkeyup="filtersearch()" id="search" type="text"
               placeholder="Search Product ">
 
-
-
             <div class="l_w_title">
               <h3>Browse Categories</h3>
             </div>
@@ -128,7 +125,7 @@
                     </label>
 
                   </li>
-                  <% }); %>
+                  <% })%>
               </ul>
             </div>
 
@@ -200,76 +197,6 @@
     </div>
 
 
-    <!--================End Category Product Area =================-->
-    <script>
-      function addToCart(proId, price) {
-        $.ajax({
-          url: '/addTocart',
-          data: {
-            productId: proId,
-            productPrice: price
-          },
-          method: "post",
-          success: (response) => {
-            if (response.success) {
-              $('.bg0').load('/wishlist .bg0')
-              console.log(response);
-              Swal.fire({
-                title: 'Added',
-                text: 'Item added to Cart',
-                icon: 'success',
-                timer: 1000,
-                showConfirmButton: false
-              })
-            } else {
-              Swal.fire({
-                text: 'Item already in Cart',
-                icon: 'info',
-                timer: 1000,
-                showConfirmButton: false
-              })
-            }
-
-          }
-        })
-      }
-    </script>
-
-    <script>
-      function addToWishlist(proId) {
-        $.ajax({
-          url: '/addToWishlist',
-          data: {
-            productId: proId
-          },
-          method: "post",
-          success: (response) => {
-            if (response.success) {
-              $('.table-shopping-cart').load('/wishlist .table-shopping-cart')
-              console.log(response);
-              Swal.fire({
-                title: 'Added',
-                text: 'Item added to wishlist',
-                icon: 'success',
-                timer: 1000,
-                showConfirmButton: false
-              })
-            } else {
-              Swal.fire({
-                text: 'Item already in wishlist',
-                icon: 'info',
-                timer: 1000,
-                showConfirmButton: false
-              })
-            }
-            console.log(response);
-          }
-        })
-      }
-    </script>
-
-    </section>
-
     <script>
       let n = 0
       let b = 0
@@ -281,7 +208,7 @@
       let sort
       function category(ID) {
 
-
+console.log(ID);
         if ($(`#${ID}`).is(':checked') == true) {
           categorys[n] = $(`#${ID}`).val()
           n++
@@ -292,18 +219,16 @@
           categorys.splice(index, 1)
           n--
         }
-        submit(categorys, filterprice, search, sort)
-
+        submit(search,categorys,filterprice, sort )
       }
 
-
-      function submit(categorys) {
+      function submit(search,categorys,filterprice, sort ) {
         $.ajax({
           url: '/shopFilter',
           type: 'post',
           dataType: 'json',
           contentType: 'application/json',
-          data: JSON.stringify({ categorys, filterprice, search, sort }),
+          data: JSON.stringify({ search,categorys,filterprice, sort }),
           success: (res) => {
             let html = []
             if (res.Data) {
@@ -354,7 +279,7 @@
 
       function filtersearch() {
         search = $('#search').val()
-        submit(categorys, search, filterprice, sort)
+        submit(search,categorys,filterprice, sort)
       }
 
 
@@ -432,7 +357,7 @@
           console.log(filterprice);
           console.log('dhcf');
         }
-        submit(categorys, search, filterprice, sort)
+        submit(search,categorys,filterprice, sort)
       }
       function sortProducts() {
         let selectedSort = document.querySelector('select').value;
@@ -441,10 +366,80 @@
         } else if (selectedSort === 'HtoL') {
           sort = 'priceHighToLow';
         }
-        submit(categorys, search, filterprice, sort);
+        submit(search,categorys,filterprice, sort);
       }
 
     </script>
+    <!--================End Category Product Area =================-->
+    <script>
+      function addToCart(proId, price) {
+        $.ajax({
+          url: '/addTocart',
+          data: {
+            productId: proId,
+            productPrice: price
+          },
+          method: "post",
+          success: (response) => {
+            if (response.success) {
+              $('.bg0').load('/wishlist .bg0')
+              console.log(response);
+              Swal.fire({
+                title: 'Added',
+                text: 'Item added to Cart',
+                icon: 'success',
+                timer: 1000,
+                showConfirmButton: false
+              })
+            } else {
+              Swal.fire({
+                text: 'Item already in Cart',
+                icon: 'info',
+                timer: 1000,
+                showConfirmButton: false
+              })
+            }
+
+          }
+        })
+      }
+    </script>
+
+    <script>
+      function addToWishlist(proId) {
+        $.ajax({
+          url: '/addToWishlist',
+          data: {
+            productId: proId
+          },
+          method: "post",
+          success: (response) => {
+            if (response.success) {
+              $('.table-shopping-cart').load('/wishlist .table-shopping-cart')
+              console.log(response);
+              Swal.fire({
+                title: 'Added',
+                text: 'Item added to wishlist',
+                icon: 'success',
+                timer: 1000,
+                showConfirmButton: false
+              })
+            } else {
+              Swal.fire({
+                text: 'Item already in wishlist',
+                icon: 'info',
+                timer: 1000,
+                showConfirmButton: false
+              })
+            }
+            console.log(response);
+          }
+        })
+      }
+    </script>
+
+    </section>
+
 
     <!--================ End Feature Product Area =================-->
 

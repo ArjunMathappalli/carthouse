@@ -183,39 +183,52 @@
       }
     </script>
 
-
-    <script>
-      function addToWishlist(proId) {
-        $.ajax({
-          url: '/addToWishlist',
-          data: {
-            productId: proId
-          },
-          method: "post",
-          success: (response) => {
-            if (response.success) {
-              $('.table-shopping-cart').load('/wishlist .table-shopping-cart')
-              console.log(response);
-              Swal.fire({
-                title: 'Added',
-                text: 'Item added to wishlist',
-                icon: 'success',
-                timer: 1000,
-                showConfirmButton: false
-              })
-            } else {
-              Swal.fire({
-                text: 'Item already in wishlist',
-                icon: 'info',
-                timer: 1000,
-                showConfirmButton: false
-              })
-            }
-            console.log(response);
-          }
-        })
+<script>
+  function addToWishlist(proId, stock) {
+  // Check the stock availability of the product
+  if (`${stock}` > 0) {
+    // Stock is available, add the product to the wishlist
+    $.ajax({
+      url: '/addToWishlist',
+      data: {
+        productId: proId
+      },
+      method: "post",
+      success: (response) => {
+        if (response.success) {
+          $('.table-shopping-cart').load('/wishlist .table-shopping-cart')
+          console.log(response);
+          Swal.fire({
+            title: 'Added',
+            text: 'Item added to wishlist',
+            icon: 'success',
+            timer: 1000,
+            showConfirmButton: false
+          })
+        } else {
+          Swal.fire({
+            text: 'Item already in wishlist',
+            icon: 'info',
+            timer: 1000,
+            showConfirmButton: false
+          })
+        }
+        console.log(response);
       }
-    </script>
+    })
+  } else {
+    // Stock is not available, show an error message
+    Swal.fire({
+      text: 'Item is out of stock',
+      icon: 'error',
+      timer: 1000,
+      showConfirmButton: false
+    })
+  }
+}
+</script>
+
+
 
     </section>
     <!--================ End Feature Product Area =================-->

@@ -169,7 +169,7 @@
                                       </div>
 
                                       <div style="width: 80px;">
-                                        <h5 class="mb-0">
+                                        <h5 class="mb-0" >
                                           <%=x.productTotalPrice%>
                                         </h5>
                                       </div>
@@ -201,10 +201,11 @@
                                     style="margin-top: -38px;margin-left: 189px;">
                                     Apply coupon
                                   </button>
-
                                 </div>
-
+                               <div> <a style="color: #0ad94f;" class="btn btn-outline-danger" onclick="removeCoupon()" style="margin-left: 192px; margin-right: -146px;">Remove coupon</a>
                               </div>
+                              </div>
+
 
                               <input type="hidden" id="code" name="code" value="">
                             </div>
@@ -261,7 +262,7 @@
 
                             <% if(typeof Coupon !='undefined' ){ %>
                               <div class="dropdown">
-                                <button class="dropbtn" id="couponBtn" style="margin-left: 27px;">Your Coupons</button>
+                                <button class="dropbtn" id="couponBtn" style="margin-left: 27px; margin-top: 10px;">Your Coupons</button>
                                 <div class="dropdown-content">
                                   <% Coupon.forEach((x)=>{ %>
                                     <a id="coupon1">
@@ -294,15 +295,11 @@
                                   });
                                 </script>
                           </div>
-
-
                           <br>
-                          <div>
-                            <button class="btn btn-outline-danger btn-md" type="button" onclick="removeCoupon()"
-                              style="margin-top: -108px;margin-left: 189px;">
-                              Remove coupon
-                            </button>
-                          </div>
+                          
+                          
+
+                        
 
                           <div class="col-12  " style="color: #000000;">
                             <div class="cart-detail">
@@ -323,13 +320,7 @@
                                   </label>
                                 </div>
 
-                                <div style="margin-left: 30px;" class="form-check">
-                                  <input class="form-check-input form-check-input-checked-color:component-active-bg;"
-                                    type="radio" name="paymentType" id="exampleRadios2" value="WALLET">
-                                  <label class="form-check-label" for="exampleRadios2">
-                                    Wallet
-                                  </label>
-                                </div>
+                                
 
                               </div>
                             </div>
@@ -344,6 +335,16 @@
                             <input type="hidden" value="<%- user.cartTotalPrice%>" name="total">
 
                           </div>
+
+                          <li>
+                            <a id="Wallet" href="#" onclick="wallet()" style="text-decoration: none;color:blue;cursor: pointer;display: flex;justify-content: space-between;margin-top: -30px;">Add Wallet Balance
+                                <span id="Amount1" style="margin-left: 200px;" class="text-success">&#8377;<%= 0 %></span>
+                            </a>
+                            <a id="Discount" style="text-decoration: none;color: blue;display: flex;justify-content: space-between; ">Wallet Discount
+                                <span id="Amount2" style="margin-left: 200px;" class="text-success">&#8377;<%= 0 %></span>
+                            </a>
+                        </li>
+
                           <div class="d-flex justify-content-between">
                             <p class="mb-2" style="color: #006d09;">discount</p>
                             <p class="mb-2" name="discount" id="discount" style="color: #006d09;">0</p>
@@ -351,16 +352,18 @@
 
                           </div>
 
+
+
                           <div class="d-flex justify-content-between mb-4">
                             <p class="mb-2" style="color: #000000;">Total(Incl. taxes)</p>
-                            <p id="total" class="mb-2" style="color:  #000000;">
+                            <p id="total" class="mb-2" style="color:  #000000;" >
                               <%=user.cartTotalPrice%>
                             </p>
                             <input type="hidden" id="total1" name="total1" value="<%=user.cartTotalPrice%>">
                           </div>
                           <hr>
 
-                          <button type="submit" class="btn btn-outline-warning btn-block btn-lg">
+                          <button type="submit" class=" btn-outline-warning btn-block btn-lg">
                             <div class="d-flex justify-content-center">
                               <!-- <span>$4818.00</span> -->
                               <span>Place order <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
@@ -731,4 +734,27 @@
         
       }
 
-    </script>
+
+
+      function wallet(){
+    console.log("opp");
+
+    $.ajax({
+        url:"/walletAmount",
+        method:'get',
+        success:(response)=>{
+            if(response.status){
+                document.getElementById('Amount1').innerText = response.wallet
+                document.getElementById('Amount2').innerText = response.wallet
+                $("#Wallet").hide();
+                $("#Discount").show();
+
+                document.getElementById('total').innerText = response.total
+            }
+
+        }
+    })
+}
+
+
+  </script>

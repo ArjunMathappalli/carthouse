@@ -1,11 +1,15 @@
 const admin = require("../models/adminModel");
-// Getting Category //
+
 const category = require("../models/categoryModel");
-// Getting Products //
+
 const product = require("../models/productModel");
+
 const Banner = require("../models/bannerModel");
+
 const path = require("path");
+
 const fs = require("fs");
+
 const { log } = require("console");
 
 const showCategory = async (req, res, next) => {
@@ -101,25 +105,6 @@ const updateCategory = async (req, res, next) => {
     next(error.message);
   }
 };
-
-// const updateCategory = async(req,res,next)=>{
-//   try {
-//     if(req.session.admin_id){
-//       if(req.files){
-//         const updateCategory = await category.findByIdAndUpdate({_id:req.body.id},{$set:{image:req.body.image}});
-
-//       }
-//       else{
-//         const updateCategory = await category.findOneAndUpdate({_id:req.body.id},{$set:{name:req.body.category}});
-//         console.log(req.body.id);
-//       }
-//       res.redirect('/admin/category')
-//     }
-//   } catch (error) {
-//     console.log(error.message);
-//     next(error.message);
-//   }
-// }
 
 const categoryControl = async (req, res, next) => {
   try {
