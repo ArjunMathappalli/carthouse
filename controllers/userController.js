@@ -1050,6 +1050,17 @@ const cancelOrder = async (req, res) => {
           { _id: orderdata.userId },
           { $inc: { wallet: orderdata.total } }
         );
+
+        const walletDt = {
+          status: "credited",
+          amount: a,
+          date: Date.now(),
+          userId: user._id,
+        };
+  
+        const Data = new walletData(walletDt);
+        Data.save();
+
       }
       for (let i = 0; i < orderdata.product.length; i++) {
         const data = await product.updateOne(
@@ -1057,15 +1068,7 @@ const cancelOrder = async (req, res) => {
           { $inc: { stock: orderdata.product[i].quantity } }
         );
       }
-      const walletDt = {
-        status: "credited",
-        amount: a,
-        date: Date.now(),
-        userId: user._id,
-      };
-
-      const Data = new walletData(walletDt);
-      Data.save();
+      
 
       res.json({ success: true });
     }
